@@ -64,4 +64,57 @@ public class UserControllerTest {
                         .content(body))
                 .andExpect(status().isBadRequest());
     }
+
+    @Test
+    void getUserByIdReturnsCorrectUser() throws Exception {
+        String body = """
+                {"name": "Ada Perez", "email": "ada@example.com"}
+                """;
+
+        String response = mockMvc.perform(post("/users")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(body))
+                .andExpect(status().isOk())
+                .andReturn().getResponse().getContentAsString();
+
+        String id = objectMapper.readTree(response).get("id").asString();
+
+        mockMvc.perform(get("/users/"+id))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.id").value(id));
+    }
+
+    @Test
+    void getUserByIdReturnsNotFoundIfIMissing() throws Exception {
+        String fakeId = "0a000aa0-0000-0aa0-0a00-0000aaa000a0";
+
+        mockMvc.perform(get("/users/"+fakeId))
+                .andExpect(status().isNotFound());
+    }
+
+    @Test
+    void getUsersParamNameReturnsFilteredUsers() throws Exception {
+        String body1 = """
+                {"name": "Ada Perez", "email": "ada@example.com"}
+                """;
+
+        String body2 = """
+                {"name": "John Marquez", "email": "john@example.com"}
+                """;
+
+        mockMvc.perform(post("/users")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(body1))
+                .andExpect(status().isOk());
+
+        mockMvc.perform(post("/users")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(body2))
+                .andExpect(status().isOk());
+
+        mockMvc.perform(get("/users?name=j"))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.length()").value(1))
+                .andExpect(jsonPath("$[0].name").value("John Marquez"));
+    }
 }

@@ -19,8 +19,15 @@ public class UserController {
     }
 
     @GetMapping("/users")
-    public List<UserResponse> getUsers(){
-        return users;
+    public List<UserResponse> getUsers(
+            @RequestParam(required = false) String name){
+        if (name == null || name.isBlank()){
+            return users;
+        }
+
+        return users.stream()
+                .filter(u -> u.name().toLowerCase().contains(name.toLowerCase()))
+                .toList();
     }
 
     @PostMapping("/users")
@@ -41,6 +48,7 @@ public class UserController {
                 .findFirst()
                 .orElseThrow(()-> new UserNotFoundException("User not found: "+ id));
     }
+
 
 
 

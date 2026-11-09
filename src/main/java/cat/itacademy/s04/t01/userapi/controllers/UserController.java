@@ -1,8 +1,8 @@
 package cat.itacademy.s04.t01.userapi.controllers;
 
 import cat.itacademy.s04.t01.userapi.exceptions.UserNotFoundException;
-import cat.itacademy.s04.t01.userapi.model.UserRequest;
-import cat.itacademy.s04.t01.userapi.model.UserResponse;
+import cat.itacademy.s04.t01.userapi.dtos.UserRequest;
+import cat.itacademy.s04.t01.userapi.dtos.UserResponse;
 import jakarta.validation.Valid;
 import org.springframework.web.bind.annotation.*;
 

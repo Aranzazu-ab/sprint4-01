@@ -1,4 +1,4 @@
-package cat.itacademy.s04.t01.userapi.model;
+package cat.itacademy.s04.t01.userapi.dtos;
 
 import java.util.UUID;
 

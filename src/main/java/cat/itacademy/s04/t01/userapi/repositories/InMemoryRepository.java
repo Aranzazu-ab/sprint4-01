@@ -13,9 +13,9 @@ public class InMemoryRepository implements UserRepository {
     private final List<User> users = new ArrayList<>();
 
     @Override
-    public void save(User user) {
+    public User save(User user) {
         users.add(user);
-
+        return user;
     }
 
     @Override

@@ -7,7 +7,7 @@ import java.util.Optional;
 import java.util.UUID;
 
 public interface UserRepository {
-    void save (User user);
+    User save (User user);
     List<User> findAll();
     Optional<User> findById(UUID id);
     List<User> searchByName (String name);

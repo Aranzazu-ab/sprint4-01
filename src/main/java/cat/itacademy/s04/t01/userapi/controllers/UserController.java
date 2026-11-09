@@ -16,6 +16,10 @@ import java.util.UUID;
 public class UserController {
     private final List<UserResponse> users = new ArrayList<>();
 
+    void clearUsers(){
+        users.clear();
+    }
+
     @GetMapping("/users")
     public List<UserResponse> getUsers(){
         return users;
@@ -31,4 +35,5 @@ public class UserController {
         users.add(user);
         return user;
     }
+
 }

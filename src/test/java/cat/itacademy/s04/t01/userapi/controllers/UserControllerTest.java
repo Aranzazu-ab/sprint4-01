@@ -81,7 +81,9 @@ public class UserControllerTest {
 
         mockMvc.perform(get("/users/"+id))
                 .andExpect(status().isOk())
-                .andExpect(jsonPath("$.id").value(id));
+                .andExpect(jsonPath("$.id").value(id))
+                .andExpect(jsonPath("$.name").value("Ada Perez"))
+                .andExpect(jsonPath("$.email").value("ada@example.com"));
     }
 
     @Test
@@ -105,12 +107,18 @@ public class UserControllerTest {
         mockMvc.perform(post("/users")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(body1))
-                .andExpect(status().isOk());
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.id").isNotEmpty())
+                .andExpect(jsonPath("$.name").value("Ada Perez"))
+                .andExpect(jsonPath("$.email").value("ada@example.com"));
 
         mockMvc.perform(post("/users")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(body2))
-                .andExpect(status().isOk());
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.id").isNotEmpty())
+                .andExpect(jsonPath("$.name").value("John Marquez"))
+                .andExpect(jsonPath("$.email").value("john@example.com"));
 
         mockMvc.perform(get("/users?name=j"))
                 .andExpect(status().isOk())

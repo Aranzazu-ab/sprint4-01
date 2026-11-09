@@ -1,12 +1,10 @@
 package cat.itacademy.s04.t01.userapi.controllers;
 
+import cat.itacademy.s04.t01.userapi.exceptions.UserNotFoundException;
 import cat.itacademy.s04.t01.userapi.model.UserRequest;
 import cat.itacademy.s04.t01.userapi.model.UserResponse;
 import jakarta.validation.Valid;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -35,5 +33,15 @@ public class UserController {
         users.add(user);
         return user;
     }
+
+    @GetMapping("/users/{id}")
+    public UserResponse getUserbyID (@PathVariable UUID id){
+        return users.stream()
+                .filter(user -> user.id().equals(id))
+                .findFirst()
+                .orElseThrow(()-> new UserNotFoundException("User not found: "+ id));
+    }
+
+
 
 }

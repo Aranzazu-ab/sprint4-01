@@ -1,12 +1,12 @@
-# 🚀 UserApi — My First REST API with Spring Boot
+# Sprint 4 — Exercise 01: UserApi (REST API with Spring Boot)
 
-Hey there! 👋 This project is my first hands-on dive into backend development using **Spring Boot 3** and **Java 21**.
+This project represents a practical implementation of a RESTful Web API built with **Spring Boot 3** and **Java 21**, developed as part of the IT Academy backend specialization.
 
-The goal here wasn't just to make a couple of HTTP endpoints work, but to understand the whole journey: starting from a quick-and-dirty controller that handles everything, and step-by-step refactoring it into a clean, **layered architecture (Controller → Service → Repository)** applying SOLID principles, TDD, and solid testing practices.
+The primary objective of this exercise is to build a functional and maintainable REST API by progressively evolving an initial controller-centric prototype into a fully decoupled **layered architecture (Controller → Service → Repository)**. The project emphasizes software engineering fundamentals, including SOLID design principles, Inversion of Control (IoC), Dependency Injection, and rigorous testing methodologies (unit, web-layer, and integration tests using JUnit 5, MockMvc, and Mockito).
 
 ---
 
-## 🛠️ Tech Stack
+## Tech Stack
 
 * **Language:** Java 21
 * **Framework:** Spring Boot 3 (Spring Web, Spring Boot DevTools)
@@ -16,7 +16,7 @@ The goal here wasn't just to make a couple of HTTP endpoints work, but to unders
 
 ---
 
-## 🗺️ Project Roadmap & Implementation
+##  Project Roadmap & Implementation
 
 ### 🟢 Level 1: First Contact & Health Check
 The priority here was verifying the environment setup, ensuring the embedded Tomcat server starts up properly, and writing our first automated web test.
@@ -34,7 +34,7 @@ The priority here was verifying the environment setup, ensuring the embedded Tom
   3. Created [`HealthControllerTest`](src/test/java/cat/itacademy/s04/t01/userapi/controllers/HealthControllerTest.java) using `@WebMvcTest(HealthController.class)` and `MockMvc` to verify HTTP 200 status and the JSON payload.
   4. Packaged the app via `./mvnw clean package` and ran `java -jar target/userapi-0.0.1-SNAPSHOT.jar`.
 
-#### 📸 Standalone JAR Execution Evidence
+#### Standalone JAR Execution Evidence
 ![JAR Execution Screenshot](docs/screenshot-jar.png)
 
 ---
@@ -98,7 +98,7 @@ Before breaking apart the controller, we switched [`UserControllerTest`](src/tes
 
 ---
 
-## 🧪 Running the Tests
+## Running the Tests
 
 To run the whole test suite (unit + integration tests):
 
@@ -113,7 +113,7 @@ To run a specific test class:
 
 ---
 
-## 🏃 How to Run the App
+## How to Run the App
 
 1. **Via Maven:**
    ```bash

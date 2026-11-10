@@ -1,7 +1,9 @@
 package cat.itacademy.s04.t01.userapi.service;
 
 import cat.itacademy.s04.t01.userapi.dtos.UserRequest;
+import cat.itacademy.s04.t01.userapi.dtos.UserResponse;
 import cat.itacademy.s04.t01.userapi.exceptions.EmailAlreadyExistException;
+import cat.itacademy.s04.t01.userapi.model.User;
 import cat.itacademy.s04.t01.userapi.repositories.UserRepository;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -9,8 +11,9 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
-import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
+import static org.springframework.test.util.AssertionErrors.assertTrue;
 
 
 @ExtendWith(MockitoExtension.class)
@@ -35,10 +38,24 @@ public class UserServiceImpTest {
         verify(userRepository, never()).save(any());
     }
 
+    @Test
+    void createUserSaveUserWhenEmailNotExists (){
+        when(userRepository.existByEmail("john@example.com"))
+                .thenReturn(false);
 
+        when(userRepository.save(any(User.class)))
+                .thenAnswer(invocationOnMock -> invocationOnMock.getArgument(0));
 
-    //Fes un segon test que comprovi que:
-    //Es genera un UUID.
-    //L’usuari es desa correctament si l’email no està repetit.
+        UserRequest userRequest = new UserRequest("John", "john@example.com");
+
+        UserResponse userResponse = userServiceImp.createUser(userRequest);
+
+        assertNotNull(userResponse.id());
+        assertEquals("John", userResponse.name());
+        assertEquals("john@example.com", userResponse.email());
+
+        verify(userRepository).save(any(User.class));
+
+    }
 }
 

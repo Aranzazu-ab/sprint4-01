@@ -34,5 +34,11 @@ public class UserServiceImpTest {
 
         verify(userRepository, never()).save(any());
     }
+
+
+
+    //Fes un segon test que comprovi que:
+    //Es genera un UUID.
+    //L’usuari es desa correctament si l’email no està repetit.
 }
 

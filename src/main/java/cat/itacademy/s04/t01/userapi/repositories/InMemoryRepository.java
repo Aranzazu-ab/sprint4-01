@@ -42,4 +42,9 @@ public class InMemoryRepository implements UserRepository {
         return users.stream()
                 .anyMatch(u -> u.email().equalsIgnoreCase(email));
     }
+
+    @Override
+    public void clear() {
+        users.clear();
+    }
 }

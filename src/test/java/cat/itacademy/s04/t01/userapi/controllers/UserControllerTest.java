@@ -1,5 +1,6 @@
 package cat.itacademy.s04.t01.userapi.controllers;
 
+import cat.itacademy.s04.t01.userapi.repositories.UserRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,11 +26,11 @@ public class UserControllerTest {
     private ObjectMapper objectMapper;
 
     @Autowired
-    private UserController userController;
+    private UserRepository userRepository;
 
     @BeforeEach
     void setUp() {
-        userController.clearUsers();
+        userRepository.clear();
     }
 
 
